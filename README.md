@@ -16,7 +16,7 @@ A sleek, responsive authentication system featuring animated transitions between
 
 ## 🌐 Live Preview
 
-**🔗 View the Demo:** []()
+**🔗 View the Demo:** [https://ahmed-maher77.github.io/SlideAuth___Sliding-Authentication-System/](https://ahmed-maher77.github.io/SlideAuth___Sliding-Authentication-System/)
 
 ---
 
@@ -51,8 +51,8 @@ A sleek, responsive authentication system featuring animated transitions between
 ---
 
 ## 👀 Website Preview
-<a href="website-url" title="demo">
-  <img src="uploaded-img-on-github-readme" alt="website preview" width="400">
+<a href="https://ahmed-maher77.github.io/SlideAuth___Sliding-Authentication-System/" title="demo">
+  <img src="https://github.com/user-attachments/assets/5e7340f9-cc67-49ad-86de-11a2f1e40f29" alt="website preview - UI Mockup" width="400">
 </a>
 
 ---
