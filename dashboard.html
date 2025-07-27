@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Dashboard</title>
+		<link rel="stylesheet" href="style.css" />
+		<script
+			src="https://kit.fontawesome.com/64d58efce2.js"
+			crossorigin="anonymous"
+		></script>
+		<style>
+			.dashboard-container {
+				min-height: 100vh;
+				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				padding: 2rem;
+				font-family: "Poppins", sans-serif;
+			}
+
+			.dashboard-card {
+				background: white;
+				border-radius: 20px;
+				padding: 3rem;
+				box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+				text-align: center;
+				max-width: 500px;
+				width: 100%;
+			}
+
+			.welcome-message {
+				font-size: 2rem;
+				color: #333;
+				margin-bottom: 1rem;
+				font-weight: 600;
+			}
+
+			.dashboard-subtitle {
+				color: #666;
+				margin-bottom: 2rem;
+				font-size: 1.1rem;
+			}
+
+			.logout-btn {
+				background: #ff4757;
+				color: white;
+				border: none;
+				padding: 12px 30px;
+				border-radius: 25px;
+				font-size: 1rem;
+				font-weight: 600;
+				cursor: pointer;
+				transition: all 0.3s ease;
+				text-decoration: none;
+				display: inline-block;
+			}
+
+			.logout-btn:hover {
+				background: #ff3742;
+				transform: translateY(-2px);
+				box-shadow: 0 10px 20px rgba(255, 71, 87, 0.3);
+			}
+
+			.user-avatar {
+				width: 80px;
+				height: 80px;
+				background: linear-gradient(45deg, #6c63ff, #667eea);
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin: 0 auto 1.5rem;
+				color: white;
+				font-size: 2rem;
+				font-weight: bold;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Toast Notification Container -->
+		<div id="toast-container"></div>
+
+		<div class="dashboard-container">
+			<div class="dashboard-card">
+				<div class="user-avatar" id="user-avatar">U</div>
+				<h1 class="welcome-message" id="welcome-message">Welcome!</h1>
+				<p class="dashboard-subtitle">
+					You have successfully logged into your dashboard
+				</p>
+				<button class="logout-btn" id="logout-btn">
+					<i class="fas fa-sign-out-alt"></i> Logout
+				</button>
+			</div>
+		</div>
+
+		<footer>
+			<p>
+				Copyright &copy; <span id="copyright-year"></span> Developed By
+				<a
+					href="https://ahmedmaher-portfolio.vercel.app/"
+					title="My Portfolio"
+					target="_blank"
+					>Ahmed Maher</a
+				>
+			</p>
+			<div class="social-links">
+				<a
+					href="https://ahmedmaher-portfolio.vercel.app/"
+					target="_blank"
+					title="My Portfolio"
+				>
+					<i class="fas fa-globe"></i> Portfolio
+				</a>
+				<a
+					href="https://www.linkedin.com/in/ahmed-maher-algohary"
+					target="_blank"
+					title="LinkedIn"
+				>
+					<i class="fab fa-linkedin"></i> LinkedIn
+				</a>
+				<a
+					href="https://github.com/Ahmed-Maher77"
+					target="_blank"
+					title="GitHub"
+				>
+					<i class="fab fa-github"></i> GitHub
+				</a>
+				<a
+					href="https://web.facebook.com/profile.php?id=100012154268952"
+					target="_blank"
+					title="Facebook"
+				>
+					<i class="fab fa-facebook"></i> Facebook
+				</a>
+			</div>
+		</footer>
+
+		<script>
+			// Check if user is logged in
+			const currentUser = localStorage.getItem("currentUser");
+
+			if (!currentUser) {
+				// Redirect to login if not logged in
+				window.location.href = "index.html";
+			} else {
+				// Display user information
+				const user = JSON.parse(currentUser);
+				document.getElementById(
+					"welcome-message"
+				).textContent = `Welcome, ${user.username}!`;
+				document.getElementById("user-avatar").textContent =
+					user.username.charAt(0).toUpperCase();
+			}
+
+			// Set copyright year
+			const copyrightYear = document.getElementById("copyright-year");
+			if (copyrightYear) {
+				copyrightYear.textContent = new Date().getFullYear();
+			}
+
+			// Logout functionality
+			document
+				.getElementById("logout-btn")
+				.addEventListener("click", function () {
+					// Show logout toast
+					showToast("You logged out successfully!", "success");
+
+					// Clear user data
+					localStorage.removeItem("currentUser");
+
+					// Redirect after a short delay
+					setTimeout(() => {
+						window.location.href = "index.html";
+					}, 1500);
+				});
+
+			// Toast notification function
+			function showToast(message, type = "info") {
+				const toastContainer =
+					document.getElementById("toast-container");
+				const toast = document.createElement("div");
+				toast.className = `toast toast-${type}`;
+				toast.innerHTML = `
+                <div class="toast-content">
+                    <i class="fas ${
+						type === "success"
+							? "fa-check-circle"
+							: "fa-info-circle"
+					}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+
+				toastContainer.appendChild(toast);
+
+				// Show toast
+				setTimeout(() => toast.classList.add("show"), 100);
+
+				// Remove toast after 3 seconds
+				setTimeout(() => {
+					toast.classList.remove("show");
+					setTimeout(() => toast.remove(), 300);
+				}, 3000);
+			}
+		</script>
+	</body>
+</html>
