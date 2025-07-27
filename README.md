@@ -11,6 +11,7 @@ A sleek, responsive authentication system featuring animated transitions between
 - **JavaScript (ES6+)** – DOM manipulation, event handling, localStorage API, regex validation  
 - **FontAwesome** – Icon library  
 - **Git** – Version control
+- **github-pages** - hosting the website
 
 ---
 
